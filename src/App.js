@@ -67,7 +67,7 @@ export default function App() {
           <br />
           <span>Total:</span>
           <br />
-          {total && <span>£{total}</span>}
+          {total && <span data-testid="total" >£{total}</span>}
         </div>
       </div>
 
