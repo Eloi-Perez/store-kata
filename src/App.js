@@ -63,9 +63,9 @@ export default function App() {
         </div>
         <div className="checkout">
           <span>Cart:</span>
-          {Object.keys(cart).map(item => <div key={item}>{item.toUpperCase()}:{cart[item]}</div>)}
+          {Object.keys(cart).map(item => <div key={item}>{item.toUpperCase()}: {cart[item]}</div>)}
           <br />
-          {total && <span>Total:</span>}
+          <span>Total:</span>
           <br />
           {total && <span>£{total}</span>}
         </div>
