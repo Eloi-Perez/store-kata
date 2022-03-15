@@ -13,6 +13,7 @@ const DB_ITEMS = {
 
 export default function App() {
   const [cart, setCart] = useState({});
+  const [total, setTotal] = useState();
 
   const handleButton = (key, n) => {
     let tempVal = 0;
@@ -29,21 +30,25 @@ export default function App() {
           Hello
         </p>
       </header>
-      <div class="store">
-        <div class="items_list">
+      <div className="store">
+        <div className="items_list">
           Items:
           {DB_ITEMS && Object.keys(DB_ITEMS).map(key => {
             return <div className="item" key={key}>{key.toUpperCase()}
               <span className="column">
-                <button onClick={() => handleButton(key, 1)} class="item_button">Add 1 to cart</button>
-                <button onClick={() => handleButton(key, -1)} class="item_button">Remove 1 from cart</button>
+                <button onClick={() => handleButton(key, 1)} className="item_button">Add 1 to cart</button>
+                <button onClick={() => handleButton(key, -1)} className="item_button">Remove 1 from cart</button>
               </span>
             </div>
           })}
-          {JSON.stringify(cart)/*testing*/}
         </div>
-        <div class="checkout">
-          Cart:
+        <div className="checkout">
+          <span>Cart:</span>
+          {Object.keys(cart).map(item => <div key={item}>{item.toUpperCase()}:{cart[item]}</div>)}
+          <br />
+          {total && <span>Total:</span>}
+          <br />
+          {total && <span>£{total}</span>}
         </div>
       </div>
 
