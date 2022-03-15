@@ -17,6 +17,16 @@ export default function App() {
           Hello
         </p>
       </header>
+      Items:
+      {DB_ITEMS && Object.keys(DB_ITEMS).map(key => {
+        return <div className="item">{key.toUpperCase()}
+          <span className="column">
+            <button class="item_button">Add 1 to cart</button>
+            <button class="item_button">Remove 1 from cart</button>
+          </span>
+        </div>
+      })}
+
     </div>
   );
 }
