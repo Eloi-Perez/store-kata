@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import './App.css';
 
@@ -22,6 +22,25 @@ export default function App() {
     let newObjectState = { ...cart, [key]: newVal };
     setCart(newObjectState);
   };
+
+  //Total calculation
+  useEffect(() => {
+    let t = 0;
+    for (const property in cart) {
+      if (DB_ITEMS[property].offer && (cart[property] >= DB_ITEMS[property].offer.items)) { //if offer        
+        let subTPrice = //apply offer
+          (Math.floor(cart[property] / DB_ITEMS[property].offer.items))
+          * DB_ITEMS[property].offer.price
+          + (cart[property] % DB_ITEMS[property].offer.items)
+          * DB_ITEMS[property].price;
+        t = t + subTPrice;
+      } else {
+        t = t + cart[property] * DB_ITEMS[property].price;
+      }
+    }
+    setTotal(Math.round(t * 100) / 100); //round for floating point number precision
+  }, [cart]);
+
 
   return (
     <div className="App">
