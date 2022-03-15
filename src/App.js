@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 import './App.css';
 
@@ -12,15 +12,15 @@ const DB_ITEMS = {
 };
 
 export default function App() {
-const [cart, setCart] = useState({});
+  const [cart, setCart] = useState({});
 
-const handleButton = (key, n) => {
-  let tempVal = 0;
-  cart[key] ? (tempVal = cart[key]) : (tempVal = 0);
-  let newVal = Math.max((tempVal + n), 0);
-  let newObjectState = { ...cart, [key]: newVal };
-  setCart(newObjectState);
-};
+  const handleButton = (key, n) => {
+    let tempVal = 0;
+    cart[key] ? (tempVal = cart[key]) : (tempVal = 0);
+    let newVal = Math.max((tempVal + n), 0);
+    let newObjectState = { ...cart, [key]: newVal };
+    setCart(newObjectState);
+  };
 
   return (
     <div className="App">
@@ -29,16 +29,24 @@ const handleButton = (key, n) => {
           Hello
         </p>
       </header>
-      Items:
-      {DB_ITEMS && Object.keys(DB_ITEMS).map(key => {
-        return <div className="item" key={key}>{key.toUpperCase()}
-          <span className="column">
-            <button onClick={() => handleButton(key, 1)} class="item_button">Add 1 to cart</button>
-            <button onClick={() => handleButton(key, -1)}class="item_button">Remove 1 from cart</button>
-          </span>
+      <div class="store">
+        <div class="items_list">
+          Items:
+          {DB_ITEMS && Object.keys(DB_ITEMS).map(key => {
+            return <div className="item" key={key}>{key.toUpperCase()}
+              <span className="column">
+                <button onClick={() => handleButton(key, 1)} class="item_button">Add 1 to cart</button>
+                <button onClick={() => handleButton(key, -1)} class="item_button">Remove 1 from cart</button>
+              </span>
+            </div>
+          })}
+          {JSON.stringify(cart)/*testing*/}
         </div>
-      })}
-      {JSON.stringify(cart)/*testing*/}
+        <div class="checkout">
+          Cart:
+        </div>
+      </div>
+
     </div>
   );
 }
